@@ -2,7 +2,9 @@ const {DataTypes}=require("sequelize");
 const sequelize=require("../config/database");
 
 
-const User=sequelize.define("User",{
+const User=sequelize.define(
+"User",
+{
 
 id:{
 type:DataTypes.INTEGER,
@@ -10,22 +12,31 @@ primaryKey:true,
 autoIncrement:true
 },
 
+
 name:{
-type:DataTypes.STRING
+type:DataTypes.STRING,
+allowNull:false
 },
+
 
 email:{
 type:DataTypes.STRING,
 unique:true
 },
 
+
 password:{
 type:DataTypes.STRING
 },
 
+
 role:{
-type:DataTypes.STRING,
-defaultValue:"EMPLOYEE"
+type:DataTypes.ENUM(
+"USER",
+"MANAGER",
+"ADMIN"
+),
+defaultValue:"USER"
 }
 
 });

@@ -1,37 +1,79 @@
-const express=require("express");
-const cors=require("cors");
+const express = require("express");
+const cors = require("cors");
 require("dotenv").config();
 
-const sequelize=require("./config/database");
-
-const authRoutes=require("./routes/authRoutes");
-const userRoutes=require("./routes/userRoutes");
+const sequelize = require("./config/database");
 
 
-const app=express();
+// Routes
+const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
+const documentRoutes = require("./routes/documentRoutes");
+const managerRoutes = require("./routes/managerRoutes");
+const adminRoutes = require("./routes/adminRoutes");
+const auditRoutes = require("./routes/auditRoutes");
 
 
+const app = express();
+
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 
 
-app.use("/api/auth",authRoutes);
+// Test MySQL Connection
+sequelize.authenticate()
+.then(() => {
+    console.log("MySQL Database Connected");
+})
+.catch((error) => {
+    console.log("Database Connection Failed:", error);
+});
 
-app.use("/api/user",userRoutes);
 
-
-
+// Sync Models
 sequelize.sync()
-.then(()=>{
+.then(() => {
+    console.log("Database Tables Created");
+})
+.catch((error)=>{
+    console.log("Table Sync Error:",error);
+});
 
-console.log("Database connected");
+// API Routes
 
-app.listen(5000,()=>{
+app.use("/api/auth", authRoutes);
 
-console.log(
-"Server running on 5000"
-);
+app.use("/api/users", userRoutes);
+
+app.use("/api/documents", documentRoutes);
+
+app.use("/api/manager", managerRoutes);
+
+app.use("/api/admin", adminRoutes);
+
+app.use("/api/audit", auditRoutes);
+
+
+
+// Default Route
+
+app.get("/",(req,res)=>{
+
+    res.send("KMRL Document Management System API Running");
 
 });
+
+
+
+// Start Server
+
+const PORT = process.env.PORT || 5000;
+
+
+app.listen(PORT,()=>{
+
+console.log(`Server running on port ${PORT}`);
 
 });

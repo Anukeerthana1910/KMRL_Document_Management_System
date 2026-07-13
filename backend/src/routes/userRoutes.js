@@ -1,51 +1,34 @@
-const router=require("express").Router();
+const express = require("express");
 
-const auth=require("../middleware/authMiddleware");
+const router = express.Router();
 
-const role=require("../middleware/roleMiddleware");
-
-
-router.get(
-"/admin",
-auth,
-role(["ADMIN"]),
-(req,res)=>{
-
-res.json({
-message:"Admin Access"
-});
-
-}
-);
-
-
-router.get(
-"/manager",
-auth,
-role(["MANAGER"]),
-(req,res)=>{
-
-res.json({
-message:"Manager Access"
-});
-
-}
-);
+const userController =
+require("../controllers/userController");
 
 
 
 router.get(
-"/employee",
-auth,
-role(["EMPLOYEE"]),
-(req,res)=>{
-
-res.json({
-message:"Employee Access"
-});
-
-}
+"/profile/:id",
+userController.getProfile
 );
 
 
-module.exports=router;
+router.get(
+"/my-documents",
+userController.myDocuments
+);
+
+
+router.put(
+"/profile",
+userController.updateProfile
+);
+
+
+router.put(
+"/change-password",
+userController.changePassword
+);
+
+
+module.exports = router;
