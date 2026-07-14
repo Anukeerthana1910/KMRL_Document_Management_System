@@ -68,47 +68,49 @@ exports.users = async(req,res)=>{
 
 };
 
-const extractText =
-require("../services/textExtractionService");
 
 // Upload Document
+const extractText = require("../services/textExtractionService");
+
+
 exports.uploadDocument = async(req,res)=>{
 
 try{
 
 
-const text =
-await extractText(
+console.log("BODY:",req.body);
+
+console.log("FILE:",req.file);
+
+
+// extract text
+
+const text = await extractText(
     req.file.path
 );
 
 
 
-const document =
-await Document.create({
+const document = await Document.create({
 
 title:req.body.title,
 
-
 filePath:req.file.path,
-
 
 category:req.body.category,
 
-
 summary:req.body.summary,
 
-
 extractedText:text,
-
 
 status:"Pending",
 
 
-uploadedBy:req.body.uploadedBy,
+// manager id from frontend
 
+uploadedBy:Number(req.body.managerId),
 
-uploadedRole:req.body.uploadedRole
+uploadedRole:"MANAGER"
 
 });
 
@@ -123,7 +125,10 @@ document
 
 
 }
+
 catch(error){
+
+console.error(error);
 
 res.status(500).json({
 
@@ -134,7 +139,6 @@ message:error.message
 }
 
 };
-
 // View Documents
 
 exports.documents = async(req,res)=>{
