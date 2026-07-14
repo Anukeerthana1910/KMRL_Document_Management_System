@@ -4,30 +4,47 @@ import {createContext,useState} from "react";
 export const AuthContext=createContext();
 
 
+function loadUser(){
+
+const raw=localStorage.getItem("user");
+
+if(!raw) return null;
+
+try{
+return JSON.parse(raw);
+}
+catch(error){
+return null;
+}
+
+}
+
+
 export function AuthProvider({children}){
 
 
-const [role,setRole]=useState(
-localStorage.getItem("role")
-);
+const [user,setUser]=useState(loadUser());
 
 
+// login accepts the raw backend response: { message, user: {id,name,email,role}, token? }
 
 function login(data){
 
+const userData=data.user || data;
+
 localStorage.setItem(
 "token",
-data.token
+data.token || ""
 );
 
 
 localStorage.setItem(
-"role",
-data.role
+"user",
+JSON.stringify(userData)
 );
 
 
-setRole(data.role);
+setUser(userData);
 
 }
 
@@ -36,7 +53,7 @@ setRole(data.role);
 function logout(){
 
 localStorage.clear();
-setRole(null);
+setUser(null);
 
 }
 
@@ -46,7 +63,8 @@ return(
 
 <AuthContext.Provider
 value={{
-role,
+user,
+role:user?.role || null,
 login,
 logout
 }}

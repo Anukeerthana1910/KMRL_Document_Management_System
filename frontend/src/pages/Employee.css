@@ -1,0 +1,394 @@
+.emp-page {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.emp-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 28px;
+  border-bottom: 1px solid var(--border);
+}
+
+.emp-logo {
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--text-h);
+}
+
+.emp-logo span {
+  color: var(--accent);
+}
+
+.emp-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.emp-welcome {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.emp-logout {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  cursor: pointer;
+}
+
+.emp-logout:hover {
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+.emp-body {
+  display: flex;
+  flex-grow: 1;
+}
+
+.emp-tabs {
+  width: 180px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
+  padding: 20px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.emp-tab {
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.emp-tab:hover {
+  background: var(--code-bg);
+}
+
+.emp-tab-active {
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.emp-content {
+  flex-grow: 1;
+  padding: 24px 28px;
+  min-width: 0;
+}
+
+.emp-section-title {
+  font-size: 19px;
+  margin: 0 0 16px;
+}
+
+.emp-error {
+  font-size: 14px;
+  color: #d1293d;
+  background: rgba(209, 41, 61, 0.1);
+  border: 1px solid rgba(209, 41, 61, 0.3);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 16px;
+}
+
+.emp-search {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.emp-search input {
+  flex-grow: 1;
+  font: inherit;
+  font-size: 14px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.emp-search button {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+
+.emp-loading,
+.emp-empty {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.emp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.emp-table th {
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--text);
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.emp-table td {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-h);
+}
+
+.emp-view-btn {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  cursor: pointer;
+}
+
+.emp-view-btn:hover {
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+.emp-status {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.emp-status-pending {
+  background: rgba(230, 160, 0, 0.15);
+  color: #a97400;
+}
+
+.emp-status-approved {
+  background: rgba(30, 160, 90, 0.15);
+  color: #1c8a55;
+}
+
+.emp-status-rejected {
+  background: rgba(209, 41, 61, 0.12);
+  color: #d1293d;
+}
+
+.emp-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 360px;
+}
+
+.emp-profile-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+.emp-profile-form input {
+  font: inherit;
+  font-size: 14px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.emp-profile-form input:disabled {
+  opacity: 0.6;
+}
+
+.emp-profile-form button {
+  align-self: flex-start;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+
+.emp-profile-msg {
+  font-size: 13px;
+  color: var(--accent);
+  margin: 0;
+}
+
+/* Modal */
+
+.emp-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 50;
+}
+
+.emp-modal {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: var(--bg);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 28px;
+  box-sizing: border-box;
+}
+
+.emp-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 16px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.emp-modal h2 {
+  font-size: 20px;
+  margin: 0 12px 8px 0;
+}
+
+.emp-modal-meta {
+  font-size: 13px;
+  color: var(--text);
+  margin: 0 0 16px;
+}
+
+.emp-modal-summary {
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--text-h);
+  margin: 0 0 20px;
+}
+
+.emp-download-btn {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 24px;
+}
+
+.emp-comments h3 {
+  font-size: 15px;
+  margin: 0 0 10px;
+}
+
+.emp-comments ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.emp-comments li {
+  font-size: 13px;
+  color: var(--text-h);
+  background: var(--code-bg);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.emp-no-comments {
+  font-size: 13px;
+  color: var(--text);
+  margin: 0 0 14px;
+}
+
+.emp-comment-form {
+  display: flex;
+  gap: 8px;
+}
+
+.emp-comment-form input {
+  flex-grow: 1;
+  font: inherit;
+  font-size: 13px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.emp-comment-form button {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .emp-body {
+    flex-direction: column;
+  }
+
+  .emp-tabs {
+    width: 100%;
+    flex-direction: row;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+}

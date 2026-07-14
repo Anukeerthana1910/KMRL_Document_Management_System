@@ -1,0 +1,368 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap');
+
+.auth-page {
+  --gv-navy: #0b2545;
+  --gv-navy-light: #123566;
+  --gv-teal: #0e7c86;
+  --gv-amber: #c98a2c;
+  --gv-paper: #f7f4ee;
+  --gv-ink: #1a1f27;
+  --gv-line: #dad4c4;
+  --gv-sub: #565a63;
+  --gv-error: #a3312a;
+  --gv-error-bg: #fbeeec;
+
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--gv-paper);
+  color: var(--gv-ink);
+  font-family: "IBM Plex Sans", var(--sans);
+  text-align: left;
+}
+
+/* Tricolour strip */
+
+.auth-tricolour {
+  display: flex;
+  height: 4px;
+}
+
+.auth-tricolour span {
+  flex: 1;
+}
+
+.auth-tricolour span:nth-child(1) { background: #ff9933; }
+.auth-tricolour span:nth-child(2) { background: #ffffff; border-top: 1px solid var(--gv-line); border-bottom: 1px solid var(--gv-line); }
+.auth-tricolour span:nth-child(3) { background: #138808; }
+
+/* Skip link */
+
+.auth-skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--gv-amber);
+  color: var(--gv-navy);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 18px;
+  border-radius: 0 0 4px 0;
+  text-decoration: none;
+  z-index: 200;
+}
+
+.auth-skip-link:focus {
+  left: 0;
+}
+
+/* Credential strip */
+
+.auth-credential-bar {
+  background: var(--gv-navy);
+  color: rgba(247, 244, 238, 0.85);
+  font-size: 12.5px;
+  letter-spacing: 0.3px;
+  padding: 7px 32px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.auth-credential-ref {
+  font-family: "IBM Plex Mono", var(--mono);
+  color: rgba(247, 244, 238, 0.6);
+}
+
+/* Main / centering */
+
+.auth-main {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.auth-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border: 1px solid var(--gv-line);
+  border-top: 3px solid var(--gv-navy);
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(10, 25, 46, 0.05);
+  padding: 32px 32px 28px;
+  box-sizing: border-box;
+}
+
+.auth-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "IBM Plex Mono", var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  color: var(--gv-teal);
+  text-decoration: none;
+  margin-bottom: 22px;
+}
+
+.auth-back:hover {
+  color: var(--gv-navy);
+}
+
+/* Letterhead */
+
+.auth-letterhead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--gv-line);
+}
+
+.auth-letterhead-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 128%;
+}
+
+.auth-letterhead-text strong {
+  font-family: "Source Serif 4", serif;
+  font-size: 17px;
+  color: var(--gv-navy);
+  letter-spacing: 0.3px;
+}
+
+.auth-letterhead-text span {
+  font-size: 11.5px;
+  color: var(--gv-sub);
+  letter-spacing: 0.2px;
+}
+
+.auth-eyebrow {
+  font-family: "IBM Plex Mono", var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--gv-teal);
+  margin: 0 0 10px;
+}
+
+.auth-title {
+  font-family: "Source Serif 4", var(--heading);
+  color: var(--gv-navy);
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  font-size: 28px;
+  line-height: 120%;
+  margin: 0 0 8px;
+}
+
+.auth-subtitle {
+  font-size: 17px;
+  line-height: 150%;
+  color: var(--gv-sub);
+  margin: 0 0 26px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-error {
+  font-size: 15px;
+  color: var(--gv-error);
+  background: var(--gv-error-bg);
+  border: 1px solid rgba(163, 49, 42, 0.25);
+  border-radius: 4px;
+  padding: 10px 12px;
+}
+
+/* Role tabs */
+
+.auth-role-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--gv-paper);
+  border: 1px solid var(--gv-line);
+  border-radius: 6px;
+  padding: 4px;
+  margin-bottom: 20px;
+}
+
+.auth-role-tab {
+  flex: 1;
+  font-family: "IBM Plex Sans", var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: var(--gv-sub);
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.auth-role-tab:hover {
+  color: var(--gv-ink);
+}
+
+.auth-role-tab.active {
+  background: #fff;
+  color: var(--gv-role-accent, var(--gv-navy));
+  box-shadow: 0 1px 3px rgba(10, 25, 46, 0.12);
+}
+
+/* Per-role accent theming: overrides the navy accent used across
+   the card border, letterhead, title and button so each role
+   reads visually differently at a glance. */
+
+.auth-role-user {
+  --gv-role-accent: var(--gv-navy);
+  --gv-role-accent-light: var(--gv-navy-light);
+}
+
+.auth-role-manager {
+  --gv-role-accent: var(--gv-teal);
+  --gv-role-accent-light: #0a5f67;
+}
+
+.auth-role-admin {
+  --gv-role-accent: var(--gv-error);
+  --gv-role-accent-light: #7d251f;
+}
+
+.auth-page .auth-card {
+  border-top-color: var(--gv-role-accent, var(--gv-navy));
+}
+
+.auth-page .auth-letterhead-text strong {
+  color: var(--gv-role-accent, var(--gv-navy));
+}
+
+.auth-page .auth-title {
+  color: var(--gv-role-accent, var(--gv-navy));
+}
+
+.auth-page .auth-button {
+  background: var(--gv-role-accent, var(--gv-navy));
+  border-color: var(--gv-role-accent, var(--gv-navy));
+}
+
+.auth-page .auth-button:hover:not(:disabled) {
+  background: var(--gv-role-accent-light, var(--gv-navy-light));
+}
+
+.auth-success {
+  font-size: 15px;
+  color: #0e7c3a;
+  background: #eaf7ee;
+  border: 1px solid rgba(14, 124, 58, 0.25);
+  border-radius: 4px;
+  padding: 10px 12px;
+}
+
+.auth-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: var(--gv-navy);
+}
+
+.auth-input {
+  font-family: "IBM Plex Sans", var(--sans);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--gv-ink);
+  background: var(--gv-paper);
+  border: 1px solid var(--gv-line);
+  border-radius: 4px;
+  padding: 14px 14px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.auth-input::placeholder {
+  color: var(--gv-sub);
+  opacity: 0.7;
+}
+
+.auth-input:focus {
+  border-color: var(--gv-teal);
+  box-shadow: 0 0 0 3px rgba(14, 124, 134, 0.15);
+}
+
+.auth-button {
+  font-family: "IBM Plex Sans", var(--sans);
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--gv-navy);
+  border: 1px solid var(--gv-navy);
+  border-radius: 3px;
+  padding: 16px 26px;
+  margin-top: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.auth-button:hover:not(:disabled) {
+  background: var(--gv-navy-light);
+}
+
+.auth-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.auth-footnote {
+  font-family: "IBM Plex Mono", var(--mono);
+  font-size: 15px;
+  letter-spacing: 0.2px;
+  color: var(--gv-sub);
+  text-align: center;
+  margin: 22px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--gv-line);
+}
+
+.auth-footnote a {
+  font-weight: 700;
+  color: var(--gv-role-accent, var(--gv-teal));
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  display: inline-block;
+  padding: 4px 2px;
+}
+
+@media (max-width: 640px) {
+
+  .auth-credential-bar {
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 20px;
+  }
+
+  .auth-main {
+    padding: 28px 18px;
+  }
+
+  .auth-card {
+    padding: 26px 22px 24px;
+  }
+
+}

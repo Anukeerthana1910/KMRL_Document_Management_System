@@ -1,72 +1,27 @@
-import {useState,useContext} from "react";
+import {useState} from "react";
 import API from "../services/api";
-import {AuthContext} from "../context/AuthContext";
 import {useNavigate,Link} from "react-router-dom";
 import "./Login.css";
 
 
-const ROLE_TABS=[
-
-{
-key:"USER",
-label:"User",
-eyebrow:"User Login",
-title:"Welcome back",
-subtitle:"Sign in to upload, track and search documents.",
-showSignup:true
-},
-
-{
-key:"MANAGER",
-label:"Manager",
-eyebrow:"Department Head Login",
-title:"Manager sign in",
-subtitle:"Review, verify and approve documents for your department.",
-showSignup:false
-},
-
-{
-key:"ADMIN",
-label:"Admin",
-eyebrow:"Restricted Access",
-title:"Administrator sign in",
-subtitle:"Full system access.",
-showSignup:false
-}
-
-];
+export default function Signup(){
 
 
-export default function Login(){
-
-
-const [selectedRole,setSelectedRole]=useState("USER");
+const [name,setName]=useState("");
 
 const [email,setEmail]=useState("");
 
 const [password,setPassword]=useState("");
 
+const [confirmPassword,setConfirmPassword]=useState("");
+
 const [error,setError]=useState("");
 
-const [notice,setNotice]=useState("");
+const [success,setSuccess]=useState("");
 
 const [loading,setLoading]=useState(false);
 
-const {login}=useContext(AuthContext);
-
 const navigate=useNavigate();
-
-const activeTab=ROLE_TABS.find(r=>r.key===selectedRole);
-
-
-
-function selectRole(key){
-
-setSelectedRole(key);
-setError("");
-setNotice("");
-
-}
 
 
 
@@ -75,50 +30,34 @@ async function submit(e){
 e.preventDefault();
 
 setError("");
-setNotice("");
+setSuccess("");
+
+if(password!==confirmPassword)
+{
+setError("Passwords do not match");
+return;
+}
 
 setLoading(true);
 
 
 try{
 
-const res=await API.post(
-"/auth/login",
+await API.post(
+"/auth/signup",
 {
+name,
 email,
 password
 }
 );
 
 
-// backend currently returns { message, user:{id,name,email,role} }
+setSuccess("Signup successful. Redirecting to login...");
 
-login(res.data);
-
-
-const actualRole=res.data.user?.role;
-
-
-const destination=
-actualRole==="ADMIN" ? "/admin" :
-actualRole==="MANAGER" ? "/manager" :
-"/employee";
-
-
-if(actualRole && actualRole!==selectedRole){
-
-setNotice(
-`This account is registered as ${actualRole}. Redirecting to the ${actualRole.toLowerCase()} portal...`
-);
-
-setTimeout(()=>navigate(destination),1100);
-
-}
-else{
-
-navigate(destination);
-
-}
+setTimeout(()=>{
+navigate("/login");
+},1200);
 
 
 }
@@ -126,7 +65,7 @@ catch(err){
 
 setError(
 err.response?.data?.message ||
-"Login failed. Please check your credentials."
+"Signup failed. Please try again."
 );
 
 }
@@ -143,7 +82,7 @@ setLoading(false);
 
 return(
 
-<div className={`auth-page auth-role-${selectedRole.toLowerCase()}`}>
+<div className="auth-page">
 
 <div className="auth-tricolour" aria-hidden="true">
 <span></span>
@@ -177,33 +116,14 @@ return(
 
 </div>
 
+<p className="auth-eyebrow">Staff Registration</p>
 
-<div className="auth-role-tabs" role="tablist" aria-label="Select account type">
-
-{ROLE_TABS.map(r=>(
-
-<button
-key={r.key}
-type="button"
-role="tab"
-aria-selected={selectedRole===r.key}
-className={"auth-role-tab" + (selectedRole===r.key ? " active" : "")}
-onClick={()=>selectRole(r.key)}
->
-{r.label}
-</button>
-
-))}
-
-</div>
-
-
-<p className="auth-eyebrow">{activeTab.eyebrow}</p>
-
-<h1 className="auth-title">{activeTab.title}</h1>
+<h1 className="auth-title">Create your account</h1>
 
 <p className="auth-subtitle">
-{activeTab.subtitle}
+Sign up for the KMRL Smart Document Management System.
+Manager and admin accounts are provisioned separately and cannot be
+created here.
 </p>
 
 
@@ -217,11 +137,25 @@ onClick={()=>selectRole(r.key)}
 )}
 
 
-{notice && (
+{success && (
 <div className="auth-success">
-{notice}
+{success}
 </div>
 )}
+
+
+<label className="auth-label">
+Full name
+
+<input
+className="auth-input"
+type="text"
+placeholder="Your full name"
+value={name}
+required
+onChange={e=>setName(e.target.value)}
+/>
+</label>
 
 
 <label className="auth-label">
@@ -247,7 +181,23 @@ type="password"
 placeholder="••••••••"
 value={password}
 required
+minLength={6}
 onChange={e=>setPassword(e.target.value)}
+/>
+</label>
+
+
+<label className="auth-label">
+Confirm password
+
+<input
+className="auth-input"
+type="password"
+placeholder="••••••••"
+value={confirmPassword}
+required
+minLength={6}
+onChange={e=>setConfirmPassword(e.target.value)}
 />
 </label>
 
@@ -256,22 +206,14 @@ onChange={e=>setPassword(e.target.value)}
 className="auth-button"
 disabled={loading}
 >
-{loading ? "Signing in..." : `Sign in as ${activeTab.label}`}
+{loading ? "Creating account..." : "Sign up"}
 </button>
 
 
 </form>
 
-{activeTab.showSignup && (
-
 <p className="auth-footnote">
-New member? <Link to="/signup">Create an account</Link>
-</p>
-
-)}
-
-<p className="auth-footnote">
-Academic project prototype &middot; Not an official government system
+Already have an account? <Link to="/login">Login here</Link>
 </p>
 
 </div>
