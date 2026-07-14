@@ -1,0 +1,835 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap');
+
+.adm-page {
+    --gv-navy: #0b2545;
+    --gv-navy-light: #123566;
+    --gv-teal: #0e7c86;
+    --gv-amber: #c98a2c;
+    --gv-paper: #f7f4ee;
+    --gv-ink: #1a1f27;
+    --gv-line: #dad4c4;
+    --gv-sub: #565a63;
+    --gv-error: #a3312a;
+    --gv-error-bg: #fbeeec;
+    --gv-success: #0e7c3a;
+    --gv-success-bg: #eaf7ee;
+    --gv-info-bg: #eaf2f7;
+
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--gv-paper);
+    color: var(--gv-ink);
+    font-family: "IBM Plex Sans", var(--sans);
+    text-align: left;
+}
+
+/* Tricolour strip, echoes Login/Employee */
+
+.adm-page::before {
+    content: "";
+    display: block;
+    height: 4px;
+    order: -1;
+    background: linear-gradient(to right,
+            #ff9933 0%, #ff9933 33.3%,
+            #ffffff 33.3%, #ffffff 66.6%,
+            #138808 66.6%, #138808 100%);
+    border-bottom: 1px solid var(--gv-line);
+}
+
+/* ---------- Topbar ---------- */
+
+.adm-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 28px;
+    background: var(--gv-navy);
+    border-bottom: 3px solid var(--gv-amber);
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.adm-topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.adm-logo {
+    font-family: "Source Serif 4", var(--heading);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.2px;
+    color: #f7f4ee;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.adm-logo span {
+    color: var(--gv-amber);
+}
+
+.adm-logo-tag {
+    font-family: "IBM Plex Mono", var(--mono);
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    color: rgba(247, 244, 238, 0.55);
+    text-transform: uppercase;
+}
+
+.adm-topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.adm-role-chip {
+    font-family: "IBM Plex Mono", var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--gv-navy);
+    background: var(--gv-amber);
+    padding: 3px 10px;
+    border-radius: 999px;
+}
+
+.adm-welcome {
+    font-size: 14px;
+    color: rgba(247, 244, 238, 0.85);
+}
+
+.adm-logout {
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: 4px;
+    border: 1px solid rgba(247, 244, 238, 0.35);
+    background: transparent;
+    color: #f7f4ee;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.adm-logout:hover {
+    border-color: var(--gv-amber);
+    background: rgba(247, 244, 238, 0.08);
+    color: var(--gv-amber);
+}
+
+/* ---------- Shell / Sidebar nav ---------- */
+
+.adm-shell {
+    display: flex;
+    flex-grow: 1;
+    min-height: 0;
+}
+
+.adm-sidebar {
+    width: 232px;
+    flex-shrink: 0;
+    background: #fff;
+    border-right: 1px solid var(--gv-line);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.adm-nav {
+    padding: 18px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.adm-nav-label {
+    font-family: "IBM Plex Mono", var(--mono);
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--gv-sub);
+    padding: 6px 12px 8px;
+}
+
+.adm-nav-item {
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: 4px;
+    border: none;
+    border-left: 3px solid transparent;
+    background: transparent;
+    color: var(--gv-sub);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.adm-nav-item svg {
+    flex-shrink: 0;
+    opacity: 0.75;
+}
+
+.adm-nav-item:hover {
+    background: var(--gv-paper);
+    color: var(--gv-navy);
+}
+
+.adm-nav-item-active {
+    background: var(--gv-paper);
+    border-left-color: var(--gv-amber);
+    color: var(--gv-navy);
+    font-weight: 700;
+}
+
+.adm-nav-item-active svg {
+    opacity: 1;
+}
+
+.adm-sidebar-footer {
+    padding: 16px;
+    border-top: 1px solid var(--gv-line);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.adm-sidebar-footer-text {
+    font-size: 11px;
+    line-height: 1.35;
+    color: var(--gv-sub);
+}
+
+.adm-sidebar-footer-text strong {
+    display: block;
+    color: var(--gv-navy);
+    font-size: 12px;
+}
+
+/* ---------- Main content ---------- */
+
+.adm-main {
+    flex-grow: 1;
+    min-width: 0;
+    overflow-y: auto;
+    padding: 28px 32px 48px;
+}
+
+.adm-page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+}
+
+.adm-page-title {
+    font-family: "Source Serif 4", var(--heading);
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--gv-navy);
+    margin: 0 0 4px;
+}
+
+.adm-page-subtitle {
+    font-size: 13.5px;
+    color: var(--gv-sub);
+    margin: 0;
+}
+
+.adm-btn {
+    font: inherit;
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 9px 18px;
+    border-radius: 4px;
+    border: 1px solid var(--gv-navy);
+    background: var(--gv-navy);
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    white-space: nowrap;
+}
+
+.adm-btn:hover {
+    background: var(--gv-navy-light);
+}
+
+.adm-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.adm-btn-ghost {
+    background: transparent;
+    color: var(--gv-navy);
+}
+
+.adm-btn-ghost:hover {
+    background: var(--gv-paper);
+}
+
+.adm-btn-danger {
+    border-color: var(--gv-error);
+    background: #fff;
+    color: var(--gv-error);
+}
+
+.adm-btn-danger:hover {
+    background: var(--gv-error);
+    color: #fff;
+}
+
+.adm-btn-small {
+    padding: 6px 12px;
+    font-size: 12.5px;
+}
+
+.adm-btn-teal {
+    border-color: var(--gv-teal);
+    background: var(--gv-teal);
+}
+
+.adm-btn-teal:hover {
+    background: #0a5f67;
+}
+
+/* ---------- Alerts ---------- */
+
+.adm-error {
+    font-size: 14px;
+    color: var(--gv-error);
+    background: var(--gv-error-bg);
+    border: 1px solid rgba(163, 49, 42, 0.25);
+    border-radius: 4px;
+    padding: 10px 12px;
+    margin-bottom: 16px;
+}
+
+.adm-success {
+    font-size: 14px;
+    color: var(--gv-success);
+    background: var(--gv-success-bg);
+    border: 1px solid rgba(14, 124, 58, 0.25);
+    border-radius: 4px;
+    padding: 10px 12px;
+    margin-bottom: 16px;
+}
+
+.adm-loading,
+.adm-empty {
+    font-size: 14px;
+    color: var(--gv-sub);
+    padding: 18px 0;
+}
+
+/* ---------- Dashboard stat cards ---------- */
+
+.adm-hero {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: #fff;
+    border: 1px solid var(--gv-line);
+    border-top: 3px solid var(--gv-navy);
+    border-radius: 6px;
+    padding: 22px 26px;
+    margin-bottom: 24px;
+}
+
+.adm-hero-illustration {
+    flex-shrink: 0;
+    width: 108px;
+    height: 108px;
+}
+
+.adm-hero-text h2 {
+    font-family: "Source Serif 4", var(--heading);
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--gv-navy);
+    margin: 0 0 6px;
+}
+
+.adm-hero-text p {
+    font-size: 13.5px;
+    color: var(--gv-sub);
+    margin: 0;
+    max-width: 56ch;
+}
+
+.adm-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.adm-stat-card {
+    background: #fff;
+    border: 1px solid var(--gv-line);
+    border-radius: 6px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-left: 4px solid var(--gv-navy);
+}
+
+.adm-stat-card.accent-amber {
+    border-left-color: var(--gv-amber);
+}
+
+.adm-stat-card.accent-teal {
+    border-left-color: var(--gv-teal);
+}
+
+.adm-stat-card.accent-error {
+    border-left-color: var(--gv-error);
+}
+
+.adm-stat-label {
+    font-family: "IBM Plex Mono", var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--gv-sub);
+}
+
+.adm-stat-value {
+    font-family: "Source Serif 4", var(--heading);
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--gv-navy);
+}
+
+.adm-section-title {
+    font-family: "Source Serif 4", var(--heading);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gv-navy);
+    margin: 0 0 14px;
+}
+
+/* ---------- Toolbar ---------- */
+
+.adm-toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.adm-search {
+    flex-grow: 1;
+    min-width: 200px;
+    display: flex;
+    gap: 8px;
+}
+
+.adm-search input,
+.adm-select {
+    flex-grow: 1;
+    font: inherit;
+    font-size: 14px;
+    padding: 10px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--gv-line);
+    background: #fff;
+    color: var(--gv-ink);
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.adm-search input:focus,
+.adm-select:focus {
+    border-color: var(--gv-teal);
+    box-shadow: 0 0 0 3px rgba(14, 124, 134, 0.15);
+}
+
+/* ---------- Table ---------- */
+
+.adm-table-wrap {
+    background: #fff;
+    border: 1px solid var(--gv-line);
+    border-radius: 6px;
+    overflow: hidden;
+    overflow-x: auto;
+}
+
+.adm-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+}
+
+.adm-table th {
+    text-align: left;
+    font-family: "IBM Plex Mono", var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gv-sub);
+    background: var(--gv-paper);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--gv-line);
+    white-space: nowrap;
+}
+
+.adm-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--gv-line);
+    color: var(--gv-ink);
+    vertical-align: middle;
+}
+
+.adm-table tr:last-child td {
+    border-bottom: none;
+}
+
+.adm-table-actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.adm-row-primary {
+    font-weight: 600;
+    color: var(--gv-navy);
+}
+
+.adm-row-sub {
+    display: block;
+    font-size: 12px;
+    color: var(--gv-sub);
+    font-weight: 400;
+}
+
+/* ---------- Badges ---------- */
+
+.adm-badge {
+    font-family: "IBM Plex Mono", var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 999px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.adm-badge-admin {
+    background: rgba(11, 37, 69, 0.1);
+    color: var(--gv-navy);
+}
+
+.adm-badge-manager {
+    background: rgba(14, 124, 134, 0.12);
+    color: var(--gv-teal);
+}
+
+.adm-badge-user {
+    background: rgba(86, 90, 99, 0.12);
+    color: var(--gv-sub);
+}
+
+.adm-badge-pending {
+    background: rgba(201, 138, 44, 0.15);
+    color: var(--gv-amber);
+}
+
+.adm-badge-approved {
+    background: var(--gv-success-bg);
+    color: var(--gv-success);
+}
+
+.adm-badge-rejected {
+    background: var(--gv-error-bg);
+    color: var(--gv-error);
+}
+
+/* ---------- Forms ---------- */
+
+.adm-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.adm-form-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.adm-form-row>* {
+    flex: 1 1 200px;
+}
+
+.adm-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    color: var(--gv-navy);
+}
+
+.adm-field input,
+.adm-field select,
+.adm-field textarea {
+    font: inherit;
+    font-size: 14px;
+    padding: 10px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--gv-line);
+    background: var(--gv-paper);
+    color: var(--gv-ink);
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.adm-field textarea {
+    resize: vertical;
+    min-height: 70px;
+    font-family: inherit;
+}
+
+.adm-field input:focus,
+.adm-field select:focus,
+.adm-field textarea:focus {
+    border-color: var(--gv-teal);
+    box-shadow: 0 0 0 3px rgba(14, 124, 134, 0.15);
+}
+
+.adm-checkbox-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.adm-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gv-ink);
+    background: var(--gv-paper);
+    border: 1px solid var(--gv-line);
+    border-radius: 4px;
+    padding: 7px 12px;
+    cursor: pointer;
+}
+
+.adm-checkbox input {
+    accent-color: var(--gv-navy);
+}
+
+.adm-form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 4px;
+}
+
+/* ---------- Cards (create panel) ---------- */
+
+.adm-panel {
+    background: #fff;
+    border: 1px solid var(--gv-line);
+    border-top: 3px solid var(--gv-navy);
+    border-radius: 6px;
+    padding: 22px 24px;
+    margin-bottom: 24px;
+}
+
+.adm-panel-title {
+    font-family: "Source Serif 4", var(--heading);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--gv-navy);
+    margin: 0 0 16px;
+}
+
+/* ---------- Modal ---------- */
+
+.adm-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(11, 37, 69, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 60;
+}
+
+.adm-modal {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    max-height: 88vh;
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 6px;
+    border: 1px solid var(--gv-line);
+    border-top: 3px solid var(--gv-navy);
+    padding: 28px;
+    box-sizing: border-box;
+    font-family: "IBM Plex Sans", var(--sans);
+    color: var(--gv-ink);
+}
+
+.adm-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 16px;
+    border: none;
+    background: transparent;
+    color: var(--gv-sub);
+    cursor: pointer;
+}
+
+.adm-modal-close:hover {
+    color: var(--gv-error);
+}
+
+.adm-modal h2 {
+    font-family: "Source Serif 4", var(--heading);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--gv-navy);
+    margin: 0 28px 6px 0;
+}
+
+.adm-modal-meta {
+    font-size: 13px;
+    color: var(--gv-sub);
+    margin: 0 0 18px;
+}
+
+.adm-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 20px;
+    margin-bottom: 18px;
+}
+
+.adm-detail-item dt {
+    font-family: "IBM Plex Mono", var(--mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--gv-sub);
+    margin-bottom: 3px;
+}
+
+.adm-detail-item dd {
+    font-size: 14px;
+    color: var(--gv-ink);
+    margin: 0;
+}
+
+/* ---------- Audit log ---------- */
+
+.adm-audit-item {
+    display: flex;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--gv-line);
+}
+
+.adm-audit-item:last-child {
+    border-bottom: none;
+}
+
+.adm-audit-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gv-teal);
+    margin-top: 6px;
+    flex-shrink: 0;
+}
+
+.adm-audit-text {
+    font-size: 13.5px;
+    color: var(--gv-ink);
+}
+
+.adm-audit-text strong {
+    color: var(--gv-navy);
+}
+
+.adm-audit-time {
+    font-family: "IBM Plex Mono", var(--mono);
+    font-size: 11.5px;
+    color: var(--gv-sub);
+    margin-top: 2px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 860px) {
+    .adm-shell {
+        flex-direction: column;
+    }
+
+    .adm-sidebar {
+        width: 100%;
+        flex-direction: row;
+        border-right: none;
+        border-bottom: 1px solid var(--gv-line);
+        overflow-x: auto;
+    }
+
+    .adm-nav {
+        flex-direction: row;
+        padding: 10px 12px;
+    }
+
+    .adm-nav-label {
+        display: none;
+    }
+
+    .adm-nav-item {
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        white-space: nowrap;
+    }
+
+    .adm-nav-item-active {
+        border-bottom-color: var(--gv-amber);
+    }
+
+    .adm-sidebar-footer {
+        display: none;
+    }
+
+    .adm-main {
+        padding: 20px;
+    }
+
+    .adm-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
