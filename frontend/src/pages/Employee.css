@@ -1,8 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap');
+
 .emp-page {
+  --gv-navy: #0b2545;
+  --gv-navy-light: #123566;
+  --gv-teal: #0e7c86;
+  --gv-amber: #c98a2c;
+  --gv-paper: #f7f4ee;
+  --gv-ink: #1a1f27;
+  --gv-line: #dad4c4;
+  --gv-sub: #565a63;
+  --gv-error: #a3312a;
+  --gv-error-bg: #fbeeec;
+  --gv-success: #0e7c3a;
+  --gv-success-bg: #eaf7ee;
+
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  background: var(--gv-paper);
+  color: var(--gv-ink);
+  font-family: "IBM Plex Sans", var(--sans);
   text-align: left;
+}
+
+/* Tricolour strip (matches the bar on Login/Landing, added via
+   pseudo-element so no JSX changes are needed) */
+
+.emp-page::before {
+  content: "";
+  display: block;
+  height: 4px;
+  order: -1;
+  background: linear-gradient(
+    to right,
+    #ff9933 0%, #ff9933 33.3%,
+    #ffffff 33.3%, #ffffff 66.6%,
+    #138808 66.6%, #138808 100%
+  );
+  border-bottom: 1px solid var(--gv-line);
 }
 
 .emp-topbar {
@@ -10,17 +45,20 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 28px;
-  border-bottom: 1px solid var(--border);
+  background: var(--gv-navy);
+  border-bottom: 3px solid var(--gv-amber);
 }
 
 .emp-logo {
+  font-family: "Source Serif 4", var(--heading);
   font-weight: 700;
-  font-size: 17px;
-  color: var(--text-h);
+  font-size: 18px;
+  letter-spacing: 0.2px;
+  color: #f7f4ee;
 }
 
 .emp-logo span {
-  color: var(--accent);
+  color: var(--gv-amber);
 }
 
 .emp-topbar-right {
@@ -31,7 +69,7 @@
 
 .emp-welcome {
   font-size: 14px;
-  color: var(--text);
+  color: rgba(247, 244, 238, 0.85);
 }
 
 .emp-logout {
@@ -39,16 +77,18 @@
   font-size: 13px;
   font-weight: 600;
   padding: 7px 14px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--text-h);
+  border-radius: 4px;
+  border: 1px solid rgba(247, 244, 238, 0.35);
+  background: transparent;
+  color: #f7f4ee;
   cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 .emp-logout:hover {
-  border-color: var(--accent-border);
-  color: var(--accent);
+  border-color: var(--gv-amber);
+  background: rgba(247, 244, 238, 0.08);
+  color: var(--gv-amber);
 }
 
 .emp-body {
@@ -57,9 +97,10 @@
 }
 
 .emp-tabs {
-  width: 180px;
+  width: 190px;
   flex-shrink: 0;
-  border-right: 1px solid var(--border);
+  background: #fff;
+  border-right: 1px solid var(--gv-line);
   padding: 20px 12px;
   display: flex;
   flex-direction: column;
@@ -69,148 +110,189 @@
 .emp-tab {
   font: inherit;
   font-size: 14px;
+  font-weight: 500;
   text-align: left;
   padding: 9px 12px;
-  border-radius: 8px;
+  border-radius: 4px;
   border: none;
+  border-left: 3px solid transparent;
   background: transparent;
-  color: var(--text);
+  color: var(--gv-sub);
   cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
 .emp-tab:hover {
-  background: var(--code-bg);
+  background: var(--gv-paper);
+  color: var(--gv-navy);
 }
 
 .emp-tab-active {
-  background: var(--accent-bg);
-  color: var(--accent);
-  font-weight: 600;
+  background: var(--gv-paper);
+  border-left-color: var(--gv-amber);
+  color: var(--gv-navy);
+  font-weight: 700;
 }
 
 .emp-content {
   flex-grow: 1;
-  padding: 24px 28px;
+  padding: 28px 32px;
   min-width: 0;
 }
 
 .emp-section-title {
-  font-size: 19px;
-  margin: 0 0 16px;
+  font-family: "Source Serif 4", var(--heading);
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--gv-navy);
+  margin: 0 0 18px;
 }
 
 .emp-error {
   font-size: 14px;
-  color: #d1293d;
-  background: rgba(209, 41, 61, 0.1);
-  border: 1px solid rgba(209, 41, 61, 0.3);
-  border-radius: 8px;
-  padding: 8px 12px;
+  color: var(--gv-error);
+  background: var(--gv-error-bg);
+  border: 1px solid rgba(163, 49, 42, 0.25);
+  border-radius: 4px;
+  padding: 10px 12px;
   margin-bottom: 16px;
 }
 
 .emp-search {
   display: flex;
   gap: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .emp-search input {
   flex-grow: 1;
   font: inherit;
   font-size: 14px;
-  padding: 9px 12px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--text-h);
+  padding: 10px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--gv-line);
+  background: #fff;
+  color: var(--gv-ink);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.emp-search input:focus {
+  border-color: var(--gv-teal);
+  box-shadow: 0 0 0 3px rgba(14, 124, 134, 0.15);
 }
 
 .emp-search button {
   font: inherit;
   font-size: 14px;
   font-weight: 600;
-  padding: 9px 16px;
-  border-radius: 8px;
-  border: none;
-  background: var(--accent);
+  padding: 9px 18px;
+  border-radius: 4px;
+  border: 1px solid var(--gv-navy);
+  background: var(--gv-navy);
   color: #fff;
   cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.emp-search button:hover {
+  background: var(--gv-navy-light);
 }
 
 .emp-loading,
 .emp-empty {
   font-size: 14px;
-  color: var(--text);
+  color: var(--gv-sub);
 }
 
 .emp-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
+  background: #fff;
+  border: 1px solid var(--gv-line);
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 .emp-table th {
   text-align: left;
-  font-size: 12px;
+  font-family: "IBM Plex Mono", var(--mono);
+  font-size: 11.5px;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.4px;
-  color: var(--text);
-  padding: 8px 10px;
-  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.5px;
+  color: var(--gv-sub);
+  background: var(--gv-paper);
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--gv-line);
 }
 
 .emp-table td {
-  padding: 10px;
-  border-bottom: 1px solid var(--border);
-  color: var(--text-h);
+  padding: 11px 12px;
+  border-bottom: 1px solid var(--gv-line);
+  color: var(--gv-ink);
+}
+
+.emp-table tr:last-child td {
+  border-bottom: none;
 }
 
 .emp-view-btn {
   font: inherit;
   font-size: 13px;
   font-weight: 600;
-  padding: 6px 12px;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--text-h);
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: 1px solid var(--gv-navy);
+  background: #fff;
+  color: var(--gv-navy);
   cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
 .emp-view-btn:hover {
-  border-color: var(--accent-border);
-  color: var(--accent);
+  background: var(--gv-navy);
+  color: #fff;
 }
 
 .emp-status {
-  font-size: 12px;
+  font-family: "IBM Plex Mono", var(--mono);
+  font-size: 11.5px;
   font-weight: 600;
-  padding: 3px 9px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  padding: 3px 10px;
   border-radius: 999px;
   display: inline-block;
 }
 
 .emp-status-pending {
-  background: rgba(230, 160, 0, 0.15);
-  color: #a97400;
+  background: rgba(201, 138, 44, 0.15);
+  color: var(--gv-amber);
 }
 
 .emp-status-approved {
-  background: rgba(30, 160, 90, 0.15);
-  color: #1c8a55;
+  background: var(--gv-success-bg);
+  color: var(--gv-success);
 }
 
 .emp-status-rejected {
-  background: rgba(209, 41, 61, 0.12);
-  color: #d1293d;
+  background: var(--gv-error-bg);
+  color: var(--gv-error);
 }
 
 .emp-profile-form {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  max-width: 360px;
+  gap: 16px;
+  max-width: 380px;
+  background: #fff;
+  border: 1px solid var(--gv-line);
+  border-top: 3px solid var(--gv-navy);
+  border-radius: 6px;
+  padding: 24px;
+  box-sizing: border-box;
 }
 
 .emp-profile-form label {
@@ -218,18 +300,26 @@
   flex-direction: column;
   gap: 6px;
   font-size: 13px;
-  font-weight: 500;
-  color: var(--text-h);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: var(--gv-navy);
 }
 
 .emp-profile-form input {
   font: inherit;
   font-size: 14px;
-  padding: 9px 12px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--text-h);
+  padding: 10px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--gv-line);
+  background: var(--gv-paper);
+  color: var(--gv-ink);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.emp-profile-form input:focus {
+  border-color: var(--gv-teal);
+  box-shadow: 0 0 0 3px rgba(14, 124, 134, 0.15);
 }
 
 .emp-profile-form input:disabled {
@@ -241,17 +331,23 @@
   font: inherit;
   font-size: 14px;
   font-weight: 600;
-  padding: 9px 18px;
-  border-radius: 8px;
-  border: none;
-  background: var(--accent);
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: 1px solid var(--gv-navy);
+  background: var(--gv-navy);
   color: #fff;
   cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.emp-profile-form button:hover {
+  background: var(--gv-navy-light);
 }
 
 .emp-profile-msg {
   font-size: 13px;
-  color: var(--accent);
+  font-weight: 600;
+  color: var(--gv-success);
   margin: 0;
 }
 
@@ -260,7 +356,7 @@
 .emp-modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(11, 37, 69, 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -274,11 +370,14 @@
   max-width: 520px;
   max-height: 85vh;
   overflow-y: auto;
-  background: var(--bg);
-  border-radius: 12px;
-  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid var(--gv-line);
+  border-top: 3px solid var(--gv-navy);
   padding: 28px;
   box-sizing: border-box;
+  font-family: "IBM Plex Sans", var(--sans);
+  color: var(--gv-ink);
 }
 
 .emp-modal-close {
@@ -288,25 +387,32 @@
   font-size: 16px;
   border: none;
   background: transparent;
-  color: var(--text);
+  color: var(--gv-sub);
   cursor: pointer;
 }
 
+.emp-modal-close:hover {
+  color: var(--gv-error);
+}
+
 .emp-modal h2 {
-  font-size: 20px;
-  margin: 0 12px 8px 0;
+  font-family: "Source Serif 4", var(--heading);
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--gv-navy);
+  margin: 0 28px 8px 0;
 }
 
 .emp-modal-meta {
   font-size: 13px;
-  color: var(--text);
+  color: var(--gv-sub);
   margin: 0 0 16px;
 }
 
 .emp-modal-summary {
   font-size: 14px;
-  line-height: 150%;
-  color: var(--text-h);
+  line-height: 155%;
+  color: var(--gv-ink);
   margin: 0 0 20px;
 }
 
@@ -314,17 +420,25 @@
   font: inherit;
   font-size: 13px;
   font-weight: 600;
-  padding: 8px 16px;
-  border-radius: 8px;
-  border: none;
-  background: var(--accent);
+  padding: 8px 18px;
+  border-radius: 4px;
+  border: 1px solid var(--gv-teal);
+  background: var(--gv-teal);
   color: #fff;
   cursor: pointer;
   margin-bottom: 24px;
+  transition: background 0.15s ease;
+}
+
+.emp-download-btn:hover {
+  background: #0a5f67;
 }
 
 .emp-comments h3 {
-  font-size: 15px;
+  font-family: "Source Serif 4", var(--heading);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gv-navy);
   margin: 0 0 10px;
 }
 
@@ -339,15 +453,16 @@
 
 .emp-comments li {
   font-size: 13px;
-  color: var(--text-h);
-  background: var(--code-bg);
-  border-radius: 8px;
+  color: var(--gv-ink);
+  background: var(--gv-paper);
+  border: 1px solid var(--gv-line);
+  border-radius: 4px;
   padding: 8px 10px;
 }
 
 .emp-no-comments {
   font-size: 13px;
-  color: var(--text);
+  color: var(--gv-sub);
   margin: 0 0 14px;
 }
 
@@ -361,22 +476,31 @@
   font: inherit;
   font-size: 13px;
   padding: 8px 10px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--text-h);
+  border-radius: 4px;
+  border: 1px solid var(--gv-line);
+  background: var(--gv-paper);
+  color: var(--gv-ink);
+  outline: none;
+}
+
+.emp-comment-form input:focus {
+  border-color: var(--gv-teal);
 }
 
 .emp-comment-form button {
   font: inherit;
   font-size: 13px;
   font-weight: 600;
-  padding: 8px 14px;
-  border-radius: 8px;
-  border: none;
-  background: var(--accent);
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--gv-navy);
+  background: var(--gv-navy);
   color: #fff;
   cursor: pointer;
+}
+
+.emp-comment-form button:hover {
+  background: var(--gv-navy-light);
 }
 
 @media (max-width: 700px) {
@@ -388,7 +512,11 @@
     width: 100%;
     flex-direction: row;
     border-right: none;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--gv-line);
     overflow-x: auto;
+  }
+
+  .emp-content {
+    padding: 20px;
   }
 }
