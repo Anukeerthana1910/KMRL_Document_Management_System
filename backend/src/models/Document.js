@@ -33,6 +33,11 @@ type:DataTypes.STRING
 summary:{
 type:DataTypes.TEXT
 },
+extractedText:{
+    type:DataTypes.TEXT,
+    allowNull:true
+},
+
 
 
 status:{

@@ -68,53 +68,72 @@ exports.users = async(req,res)=>{
 
 };
 
-
+const extractText =
+require("../services/textExtractionService");
 
 // Upload Document
-
 exports.uploadDocument = async(req,res)=>{
 
-    try{
+try{
 
 
-        const document =
-        await Document.create({
-
-            title:req.body.title,
-
-            filePath:req.file.path,
-
-            category:req.body.category,
-
-            summary:req.body.summary,
-
-            status:"Pending"
-
-        });
+const text =
+await extractText(
+    req.file.path
+);
 
 
 
-        res.json({
+const document =
+await Document.create({
 
-            message:"Document uploaded",
-
-            document
-
-        });
+title:req.body.title,
 
 
-    }
-    catch(error){
+filePath:req.file.path,
 
-        res.status(500).json({
-            message:error.message
-        });
 
-    }
+category:req.body.category,
+
+
+summary:req.body.summary,
+
+
+extractedText:text,
+
+
+status:"Pending",
+
+
+uploadedBy:req.body.uploadedBy,
+
+
+uploadedRole:req.body.uploadedRole
+
+});
+
+
+res.json({
+
+message:"Document uploaded successfully",
+
+document
+
+});
+
+
+}
+catch(error){
+
+res.status(500).json({
+
+message:error.message
+
+});
+
+}
 
 };
-
-
 
 // View Documents
 
