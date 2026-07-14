@@ -20,6 +20,7 @@
     "multer": "^2.2.0",
     "mysql2": "^3.22.6",
     "pdf-parse": "^2.4.5",
+    "pdf-poppler": "^0.2.3",
     "sequelize": "^6.37.8",
     "tesseract.js": "^7.0.0"
   },
