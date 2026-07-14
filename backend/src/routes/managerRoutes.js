@@ -63,5 +63,8 @@ router.get(
 controller.reports
 );
 
-
+router.delete(
+    "/documents/:id",
+    controller.deleteDocument
+);
 module.exports=router;

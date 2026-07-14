@@ -1,7 +1,8 @@
 const User = require("../models/User");
 const Document = require("../models/Document");
 
-
+const createAuditLog =
+require("../utils/createAuditLog");
 // Dashboard
 
 exports.dashboard = async(req,res)=>{
@@ -225,7 +226,71 @@ exports.reject = async(req,res)=>{
 
 };
 
+// Manager can delete USER and MANAGER documents
 
+exports.deleteDocument = async(req,res)=>{
+
+    try{
+
+
+        const document =
+        await Document.findByPk(req.params.id);
+
+
+
+        if(!document){
+
+            return res.status(404).json({
+
+                message:"Document not found"
+
+            });
+
+        }
+
+
+
+        await Document.destroy({
+
+            where:{
+                id:req.params.id
+            }
+
+        });
+
+await createAuditLog(
+
+    req.body.managerId,
+
+    "DELETE_DOCUMENT",
+
+    document.id,
+
+    `Manager deleted document ${document.title}`
+
+);
+
+        res.json({
+
+            message:
+            "Document deleted by manager"
+
+        });
+
+
+
+    }
+    catch(error){
+
+        res.status(500).json({
+
+            message:error.message
+
+        });
+
+    }
+
+};
 
 // Reports
 

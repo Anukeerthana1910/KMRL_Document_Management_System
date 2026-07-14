@@ -10,5 +10,12 @@ const sequelize = new Sequelize(
     dialect:"mysql"
 });
 
+sequelize.sync({alter:true})
+.then(()=>{
+    console.log("Database Tables Updated");
+})
+.catch((error)=>{
+    console.log(error);
+});
 
 module.exports = sequelize;

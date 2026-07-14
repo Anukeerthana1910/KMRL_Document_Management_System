@@ -2,7 +2,8 @@ const User = require("../models/User");
 const Document = require("../models/Document");
 const bcrypt = require("bcrypt");
 
-
+const createAuditLog =
+require("../utils/createAuditLog");
 // View Profile
 
 exports.getProfile = async(req,res)=>{
@@ -35,7 +36,101 @@ exports.getProfile = async(req,res)=>{
 };
 
 
+const fs = require("fs");
 
+
+// User delete own document only
+
+exports.deleteDocument = async(req,res)=>{
+
+    try{
+
+        const document =
+        await Document.findByPk(req.params.id);
+
+
+        if(!document){
+
+            return res.status(404).json({
+                message:"Document not found"
+            });
+
+        }
+
+
+        // check ownership
+
+        if(
+            document.uploadedBy != req.body.userId
+        ){
+
+            return res.status(403).json({
+
+                message:
+                "You can delete only your uploaded documents"
+
+            });
+
+        }
+
+
+
+        // user cannot delete manager files
+
+        if(
+            document.uploadedRole === "MANAGER"
+        ){
+
+            return res.status(403).json({
+
+                message:
+                "Cannot delete manager document"
+
+            });
+
+        }
+
+
+
+        await Document.destroy({
+
+            where:{
+                id:req.params.id
+            }
+
+        });
+
+        await createAuditLog(
+
+    req.body.userId,
+
+    "DELETE_DOCUMENT",
+
+    document.id,
+
+    `User deleted document ${document.title}`
+
+);
+
+        res.json({
+
+            message:"Document deleted"
+
+        });
+
+
+    }
+    catch(error){
+
+        res.status(500).json({
+
+            message:error.message
+
+        });
+
+    }
+
+};
 // View My Documents
 
 exports.myDocuments = async(req,res)=>{
@@ -104,7 +199,72 @@ exports.updateProfile = async(req,res)=>{
 
 };
 
+// Upload Document
 
+exports.uploadDocument = async(req,res)=>{
+
+    try{
+
+
+        if(!req.file){
+
+            return res.status(400).json({
+
+                message:"File required"
+
+            });
+
+        }
+
+
+        const document =
+        await Document.create({
+
+            title:req.body.title,
+
+            filePath:req.file.path,
+
+            category:req.body.category,
+
+            summary:req.body.summary,
+
+
+            // user id from request
+
+            uploadedBy:req.body.userId,
+
+
+            uploadedRole:"USER",
+
+
+            status:"Pending"
+
+        });
+
+
+
+        res.json({
+
+            message:"Document uploaded successfully",
+
+            document
+
+        });
+
+
+
+    }
+    catch(error){
+
+        res.status(500).json({
+
+            message:error.message
+
+        });
+
+    }
+
+};
 
 // Change Password
 

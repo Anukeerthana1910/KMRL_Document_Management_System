@@ -42,8 +42,19 @@ type:DataTypes.ENUM(
 "Rejected"
 ),
 defaultValue:"Pending"
-}
+},
+uploadedBy:{
+    type: DataTypes.INTEGER,
+    allowNull:false
+},
 
+uploadedRole:{
+    type: DataTypes.ENUM(
+        "USER",
+        "MANAGER"
+    ),
+    allowNull:false
+}
 });
 
 
