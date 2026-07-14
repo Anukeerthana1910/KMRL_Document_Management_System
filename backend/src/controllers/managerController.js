@@ -71,43 +71,49 @@ exports.users = async(req,res)=>{
 
 
 // Upload Document
+exports.uploadDocument = async (req, res) => {
 
-exports.uploadDocument = async(req,res)=>{
+    try {
 
-    try{
+        console.log("BODY:", req.body);
+        console.log("FILE:", req.file);
 
+        const document = await Document.create({
 
-        const document =
-        await Document.create({
+            title: req.body.title,
 
-            title:req.body.title,
+            filePath: req.file.path,
 
-            filePath:req.file.path,
+            category: req.body.category,
 
-            category:req.body.category,
+            summary: req.body.summary,
 
-            summary:req.body.summary,
+            status: "Pending",
 
-            status:"Pending"
+            uploadedBy: Number(req.body.managerId),
+
+            uploadedRole: "MANAGER"
 
         });
 
-
-
         res.json({
 
-            message:"Document uploaded",
+            message: "Document uploaded",
 
             document
 
         });
 
-
     }
-    catch(error){
+
+    catch (error) {
+
+        console.error(error);
 
         res.status(500).json({
-            message:error.message
+
+            message: error.message
+
         });
 
     }

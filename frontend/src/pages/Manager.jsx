@@ -108,14 +108,34 @@ export default function Manager() {
         </aside>
 
         <main className="adm-main">
-          {activeSection === "dashboard" && (
-            <DashboardSection user={user} onNavigate={setActiveSection} />
-          )}
-          {activeSection === "users" && <UsersSection />}
-          {activeSection === "upload" && <UploadSection onNavigate={setActiveSection} />}
-          {activeSection === "documents" && <DocumentsSection />}
-          {activeSection === "reports" && <ReportsSection />}
-        </main>
+
+    {activeSection === "dashboard" && (
+        <DashboardSection
+            user={user}
+            onNavigate={setActiveSection}
+        />
+    )}
+
+    {activeSection === "users" && (
+        <UsersSection />
+    )}
+
+    {activeSection === "upload" && (
+        <UploadSection
+            user={user}
+            onNavigate={setActiveSection}
+        />
+    )}
+
+    {activeSection === "documents" && (
+        <DocumentsSection />
+    )}
+
+    {activeSection === "reports" && (
+        <ReportsSection />
+    )}
+
+</main>
       </div>
     </div>
   );
@@ -351,7 +371,7 @@ function UsersSection() {
    UPLOAD DOCUMENT
    ============================================================ */
 
-function UploadSection({ onNavigate }) {
+function UploadSection({ user, onNavigate }) {
   const [form, setForm] = useState({ title: "", category: "", summary: "" });
   const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
@@ -377,7 +397,11 @@ function UploadSection({ onNavigate }) {
     payload.append("title", form.title);
     payload.append("category", form.category);
     payload.append("summary", form.summary);
+    payload.append("managerId", user.id);
     payload.append("file", file);
+
+    console.log("Logged in user:", user);
+    console.log("Manager ID:", user.id);
 
     setUploading(true);
     try {
